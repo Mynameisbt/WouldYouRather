@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logoutUser } from '../actions/authenticate'
 import AllQuestionsView from './AllQuestionsView';
+import LeaderBoardView from './LeaderBoardView';
 
 
 class HomeView extends Component {
@@ -41,7 +42,7 @@ class HomeView extends Component {
                             <div>New Question</div>
                         :
                         (this.state.selectedTab === 'Leader Board') ? 
-                            <div>Leader Board</div>
+                            <LeaderBoardView />
                         : null
                     }   
                 </div>
