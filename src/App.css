@@ -69,3 +69,8 @@
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.question-panel {
+  background-color: lightgray;
+  box-shadow: #282c34
+}
