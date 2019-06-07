@@ -37,7 +37,7 @@ class App extends React.Component {
 
 function mapStateToProps({authenticate}) {
   return {
-    authenticated: authenticate.currentUser !== null
+    authenticated: authenticate.currentUser ? true : false
   }
 }
 

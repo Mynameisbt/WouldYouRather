@@ -1,13 +1,19 @@
 import { _getUsers } from '../_DATA'
+import { _getQuestions } from '../_DATA'
 import { getUsers } from './authenticate'
+import { receiveQuestions } from './questions'
+
 export function handleInitialData() {
     return (dispatch) => {
-        return _getUsers()
+         _getUsers()
             .then((users) => {
                 dispatch(getUsers(users))
             })
-
-
+        _getQuestions()
+        .then((questions)=> {
+            dispatch(receiveQuestions(questions))
+        });
+        return;
         // return getInitialData()
         //     .then(({users, tweets}) => {
         //         dispatch(receiveUsers(users))

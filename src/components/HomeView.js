@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logoutUser } from '../actions/authenticate'
+import AllQuestionsView from './AllQuestionsView';
 
 
 class HomeView extends Component {
@@ -24,19 +25,17 @@ class HomeView extends Component {
         return (
             <div>
                 <h3>Home View</h3>
-                <div>
-                    <span>
-                        <button onClick={() => this.goTab('Home')}>Home</button>
-                        <button onClick={() => this.goTab('New Question')}>New Question</button>
-                        <button onClick={() => this.goTab('Leader Board')}>Leader Board</button>
+                <div className='tab'>
+                        <button className='tablinks' onClick={() => this.goTab('Home')}>Home</button>
+                        <button className='tablinks' onClick={() => this.goTab('New Question')}>New Question</button>
+                        <button className='tablinks' onClick={() => this.goTab('Leader Board')}>Leader Board</button>
                         <span>Welcome {this.props.currentUser}</span>
-                        <button onClick={this.logout}>Logout</button>
-                    </span>
+                        <button className='tablinks' onClick={this.logout}>Logout</button>
                 </div>
                 <div>
                     {
                         (this.state.selectedTab === 'Home') ? 
-                            <div>Home</div>
+                            <AllQuestionsView/>
                         :
                         (this.state.selectedTab === 'New Question') ? 
                             <div>New Question</div>
