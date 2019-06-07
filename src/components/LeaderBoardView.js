@@ -9,8 +9,8 @@ class LeaderBoardView extends Component {
         console.log(this.props)
         console.log(this.state)
         return (
-            Object.keys(this.props.users).map((userKey) => (
-                <UserRankView userId={userKey} key={userKey}/>
+            this.props.users.sort((a,b) => ( (b.questions.length + Object.keys(b.answers).length)-(a.questions.length + Object.keys(a.answers).length)  )).map((user) => (
+                <UserRankView userId={user.id} key={user.id}/>
             ))
         )
     }
@@ -18,7 +18,7 @@ class LeaderBoardView extends Component {
 
 function mapStateToProps ( {authenticate}, props) {
     return {
-        users: authenticate.users,
+        users: Object.keys(authenticate.users).map(key => authenticate.users[key])
     }
 }
 
