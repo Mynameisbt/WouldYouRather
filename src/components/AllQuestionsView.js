@@ -32,7 +32,7 @@ class AllQuestionsView extends Component {
         console.log(this.props)
         console.log(this.state)
         return (
-            <div>
+            <div style={{width:'100%'}}>
                 <div className='tab'>
                         <a className='tablinks' onClick={() => this.goTab('Unanswered')}>Unanswered</a>
                         <a className='tablinks' onClick={() => this.goTab('Answered')}>Answered</a>

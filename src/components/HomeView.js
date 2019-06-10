@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { logoutUser } from '../actions/authenticate'
 import AllQuestionsView from './AllQuestionsView';
 import LeaderBoardView from './LeaderBoardView';
+import CreateQuestionsView from './CreateQuestionView';
+
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -29,13 +31,13 @@ class HomeView extends Component {
                         <span>Welcome {this.props.users[this.props.currentUser].name}</span>
                         <a className='tablinks' onClick={this.logout}>Logout</a>
                 </div>
-                <div>
+                <div style={{display:'flex', justifyContent:'center', flexDirection:'column',alignItems:'center'}}>
                     
                           <Route exact path='/' render={({ history }) => (
                             <AllQuestionsView/>
                           )} />
                           <Route path='/add' render={({ history }) => (
-                            <div>New Question</div>
+                            <CreateQuestionsView />
                           )} />
                         <Route path='/leaderboard' render={({ history }) => (
                             <LeaderBoardView />
