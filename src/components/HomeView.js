@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { logoutUser } from '../actions/authenticate'
 import AllQuestionsView from './AllQuestionsView';
 import LeaderBoardView from './LeaderBoardView';
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class HomeView extends Component {
@@ -11,12 +13,6 @@ class HomeView extends Component {
     }
     logout = (e) => {
         this.props.dispatch(logoutUser())
-    }
-    
-    goTab = (tab) => {
-        this.setState(() => ({
-            selectedTab: tab
-        }));
     }
 
 
@@ -27,24 +23,23 @@ class HomeView extends Component {
             <div>
                 <h3>Home View</h3>
                 <div className='tab'>
-                        <button className='tablinks' onClick={() => this.goTab('Home')}>Home</button>
-                        <button className='tablinks' onClick={() => this.goTab('New Question')}>New Question</button>
-                        <button className='tablinks' onClick={() => this.goTab('Leader Board')}>Leader Board</button>
+                        <Link to='/' className='tablinks' >Home</Link>
+                        <Link to='/add' className='tablinks' >New Question</Link>
+                        <Link to='/leaderboard' className='tablinks' >Leader Board</Link>
                         <span>Welcome {this.props.users[this.props.currentUser].name}</span>
-                        <button className='tablinks' onClick={this.logout}>Logout</button>
+                        <a className='tablinks' onClick={this.logout}>Logout</a>
                 </div>
                 <div>
-                    {
-                        (this.state.selectedTab === 'Home') ? 
+                    
+                          <Route exact path='/' render={({ history }) => (
                             <AllQuestionsView/>
-                        :
-                        (this.state.selectedTab === 'New Question') ? 
+                          )} />
+                          <Route path='/add' render={({ history }) => (
                             <div>New Question</div>
-                        :
-                        (this.state.selectedTab === 'Leader Board') ? 
+                          )} />
+                        <Route path='/leaderboard' render={({ history }) => (
                             <LeaderBoardView />
-                        : null
-                    }   
+                          )} />
                 </div>
             </div>
         )

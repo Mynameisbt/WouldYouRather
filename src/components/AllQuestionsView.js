@@ -34,8 +34,8 @@ class AllQuestionsView extends Component {
         return (
             <div>
                 <div className='tab'>
-                        <button className='tablinks' onClick={() => this.goTab('Unanswered')}>Unanswered</button>
-                        <button className='tablinks' onClick={() => this.goTab('Answered')}>Answered</button>
+                        <a className='tablinks' onClick={() => this.goTab('Unanswered')}>Unanswered</a>
+                        <a className='tablinks' onClick={() => this.goTab('Answered')}>Answered</a>
                 </div>
                 <div className="questions-list">
                 {
