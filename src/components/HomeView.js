@@ -30,7 +30,7 @@ class HomeView extends Component {
                         <button className='tablinks' onClick={() => this.goTab('Home')}>Home</button>
                         <button className='tablinks' onClick={() => this.goTab('New Question')}>New Question</button>
                         <button className='tablinks' onClick={() => this.goTab('Leader Board')}>Leader Board</button>
-                        <span>Welcome {this.props.currentUser}</span>
+                        <span>Welcome {this.props.users[this.props.currentUser].name}</span>
                         <button className='tablinks' onClick={this.logout}>Logout</button>
                 </div>
                 <div>

@@ -15,6 +15,19 @@ class AllQuestionsView extends Component {
         }));
     }
 
+    sortQuestionsByRecentlyCreated = (q1, q2) => {
+        const q1Date = q1.timestamp;
+        const q2Date = q2.timestamp;
+
+        if (q1Date > q2Date) {
+            return -1;
+        } else if (q1Date < q2Date) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }    
+
     render() {
         console.log(this.props)
         console.log(this.state)
@@ -24,11 +37,13 @@ class AllQuestionsView extends Component {
                         <button className='tablinks' onClick={() => this.goTab('Unanswered')}>Unanswered</button>
                         <button className='tablinks' onClick={() => this.goTab('Answered')}>Answered</button>
                 </div>
+                <div className="questions-list">
                 {
                     (this.state.selectedTab === 'Unanswered') ? 
-                        this.props.unansweredQuestions.map((question) => <QuestionView questionId={question.id} />)
-                     : this.props.answeredQuestions.map((question) => <QuestionView questionId={question.id} />) 
+                        this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView questionId={question.id} />)
+                    : this.props.answeredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView questionId={question.id} />) 
                 }
+                </div>   
             </div>
         )
     }
