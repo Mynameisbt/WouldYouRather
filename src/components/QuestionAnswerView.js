@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 
 class QuestionsAnswerView extends Component {
@@ -57,13 +58,16 @@ class QuestionsAnswerView extends Component {
                     :
                 (
                 <div>
-                <h3>Would you rather?</h3>
-                <div>
-                    <input type="radio" name="question" value="1"/>{this.props.question.optionOne.text}?
-                </div>
-                <div>
-                    <input type="radio" name="question" value="2"/>{this.props.question.optionTwo.text}?
-                </div>
+                    <h3>Would you rather?</h3>
+                    <div>
+                        <input type="radio" name="question" value="1"/>{this.props.question.optionOne.text}?
+                    </div>
+                    <div>
+                        <input type="radio" name="question" value="2"/>{this.props.question.optionTwo.text}?
+                    </div>
+                    <div>
+                        <button>Vote</button>
+                    </div>
                 </div>
                 ) 
                 }
@@ -76,10 +80,10 @@ function mapStateToProps ( {authenticate, questions}, props) {
     let currentUser = authenticate.users[authenticate.currentUser];    
     return {
         currentUser: currentUser,
-        question: questions[props.questionId],
-        questionAuthorUser: authenticate.users[questions[props.questionId].author]
+        question: questions[props.match.params.questionId],
+        questionAuthorUser: authenticate.users[questions[props.match.params.questionId].author]
     }
 }
 
 
-export default connect(mapStateToProps)(QuestionsAnswerView)
+export default withRouter(connect(mapStateToProps)(QuestionsAnswerView))

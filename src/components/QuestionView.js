@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { Link } from 'react-router-dom'
 
 class QuestionsView extends Component {
 
@@ -14,7 +15,7 @@ class QuestionsView extends Component {
                     <img className="avatar" src={this.props.questionAuthorUser.avatarURL} />
                     <div style={{width:'100%', textAlign:"center"}}>{this.props.question.optionOne.text}</div>
                 </div>
-                <button>View Poll</button>
+                <Link  to={"/question/"+this.props.questionId}>View Poll</Link>
             </div>
         )
     }

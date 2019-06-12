@@ -7,6 +7,7 @@ import CreateQuestionsView from './CreateQuestionView';
 
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import QuestionAnswerView from './QuestionAnswerView';
 
 
 class HomeView extends Component {
@@ -41,6 +42,9 @@ class HomeView extends Component {
                           )} />
                         <Route path='/leaderboard' render={({ history }) => (
                             <LeaderBoardView />
+                          )} />
+                        <Route path='/question/:questionId' render={({ history }) => (
+                            <QuestionAnswerView />
                           )} />
                 </div>
             </div>
