@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
+import { handleAnswerQuestion } from '../actions/questions'
 
 class QuestionsAnswerView extends Component {
 
@@ -34,6 +34,20 @@ class QuestionsAnswerView extends Component {
         }
     }
 
+    vote = (e) => {
+        let option1 = document.getElementById("optionOne").checked;
+        let option2 = document.getElementById("optionTwo").checked;
+
+        if (option1) {
+            this.props.dispatch(handleAnswerQuestion(this.props.match.params.questionId,this.props.currentUser.id,"optionOne"))
+        } else if (option2) {
+            this.props.dispatch(handleAnswerQuestion(this.props.match.params.questionId,this.props.currentUser.id,"optionTwo"))
+        } else {
+            alert("Select one option");
+        }
+        return;
+    }
+
     render() {
         console.log(this.props)
         console.log(this.state)
@@ -60,13 +74,13 @@ class QuestionsAnswerView extends Component {
                 <div>
                     <h3>Would you rather?</h3>
                     <div>
-                        <input type="radio" name="question" value="1"/>{this.props.question.optionOne.text}?
+                        <input type="radio" name="question" value="1" id="optionOne"/>{this.props.question.optionOne.text}?
                     </div>
                     <div>
-                        <input type="radio" name="question" value="2"/>{this.props.question.optionTwo.text}?
+                        <input type="radio" name="question" value="2" id="optionTwo"/>{this.props.question.optionTwo.text}?
                     </div>
                     <div>
-                        <button>Vote</button>
+                        <button onClick={this.vote}>Vote</button>
                     </div>
                 </div>
                 ) 
