@@ -1,7 +1,8 @@
 import { _getUsers } from '../_DATA'
 import { _getQuestions } from '../_DATA'
-import { getUsers } from './authenticate'
-import { receiveQuestions } from './questions'
+import { getUsers, setAnswerOnUser } from './authenticate'
+import { receiveQuestions, answerQuestion } from './questions'
+import {_saveQuestionAnswer } from '../_DATA'
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -22,4 +23,16 @@ export function handleInitialData() {
         //         dispatch(hideLoading())
         //     } )
     }
+}
+
+export function handleAnswerQuestion(id, currentUser, answer) {
+    return (dispatch) => {
+        dispatch(answerQuestion(id, currentUser, answer))
+        dispatch(setAnswerOnUser(currentUser, id, answer))
+
+        return  _saveQuestionAnswer({authedUser:currentUser,qid:id, answer}).catch( () => {
+            alert('An error occurred');
+        });
+    }
+   
 }
