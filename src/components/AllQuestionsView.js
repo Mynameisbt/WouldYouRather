@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { logoutUser } from '../actions/authenticate'
 import QuestionView from './QuestionView';
 
 
