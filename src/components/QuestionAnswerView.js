@@ -54,6 +54,7 @@ class QuestionsAnswerView extends Component {
         return (
             <div className='question-panel'>
                 <h3>Asked by {this.props.questionAuthorUser.name}</h3>
+                <img className="avatar" src={"../"+this.props.questionAuthorUser.avatarURL} />
                 {
                     this.hasUserAnsweredQuestion() ? (
                     <div>
