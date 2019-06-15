@@ -39,8 +39,8 @@ class AllQuestionsView extends Component {
                 <div className="questions-list">
                 {
                     (this.state.selectedTab === 'Unanswered') ? 
-                        this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView questionId={question.id} />)
-                    : this.props.answeredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView questionId={question.id} />) 
+                        this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
+                    : this.props.answeredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />) 
                 }
                 </div>   
             </div>
