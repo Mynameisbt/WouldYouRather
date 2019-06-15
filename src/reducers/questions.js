@@ -17,8 +17,9 @@ export default function questions(state={}, action) {
                 [action.question.id]: action.question
             }
         case ANSWER_QUESTION:
-            state[action.id][action.answer].votes = state[action.id][action.answer].votes.concat(action.currentUser);
-            return state
+            let newState = Object.assign({}, state);
+            newState[action.id][action.answer].votes = newState[action.id][action.answer].votes.concat(action.currentUser);
+            return newState;
         case SAVE_QUESTION:
             return {
                 ...state,

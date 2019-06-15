@@ -5,15 +5,6 @@ import { handleAnswerQuestion } from '../actions/shared'
 
 class QuestionsAnswerView extends Component {
 
-    hasUserAnsweredQuestion = () => {
-        if (this.props.question.optionOne.votes.indexOf(this.props.currentUser.id) === -1 &&
-            this.props.question.optionTwo.votes.indexOf(this.props.currentUser.id) === -1) {
-                return false;
-            } else {
-                return true;
-            }
-    }
-
     voteLabel = (index) => {
         const optionOneVotes = this.props.question.optionOne.votes.length
         const optionTwoVotes = this.props.question.optionTwo.votes.length
@@ -56,7 +47,7 @@ class QuestionsAnswerView extends Component {
                 <h3>Asked by {this.props.questionAuthorUser.name}</h3>
                 <img className="avatar" src={"../"+this.props.questionAuthorUser.avatarURL} />
                 {
-                    this.hasUserAnsweredQuestion() ? (
+                    this.props.hasUserAnsweredQuestion ? (
                     <div>
                         <div>
                             <div>{this.props.question.optionOne.text}</div>
@@ -92,11 +83,20 @@ class QuestionsAnswerView extends Component {
 }
 
 function mapStateToProps ( {authenticate, questions}, props) {
-    let currentUser = authenticate.users[authenticate.currentUser];    
+    let currentUser = authenticate.users[authenticate.currentUser];
+    let question = questions[props.match.params.questionId];
+    let hasUserAnsweredQuestion = false;
+     if (question.optionOne.votes.indexOf(currentUser.id) === -1 &&
+         question.optionTwo.votes.indexOf(currentUser.id) === -1) {
+            hasUserAnsweredQuestion = false;
+    } else {
+            hasUserAnsweredQuestion = true;
+    }
     return {
-        currentUser: currentUser,
-        question: questions[props.match.params.questionId],
-        questionAuthorUser: authenticate.users[questions[props.match.params.questionId].author]
+        currentUser,
+        question,
+        questionAuthorUser: authenticate.users[questions[props.match.params.questionId].author],
+        hasUserAnsweredQuestion
     }
 }
 
