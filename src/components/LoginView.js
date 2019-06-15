@@ -21,8 +21,8 @@ class LoginView extends Component {
         return (
             <div>
                 <h3>Login View</h3>
-                <select value={this.state.selectedUser}  onChange={(e) => this.setState({selectedUser: e.target.value})}>
-                <option value="" disabled selected>Select user</option>
+                <select value={this.state.selectedUser} onChange={(e) => this.setState({selectedUser: e.target.value})}>
+                <option value="" disabled>Select user</option>
                 {
                     Object.keys(this.props.users).map((user) => <option key={user}>{user}</option>)
                 }
