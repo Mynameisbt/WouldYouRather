@@ -9,8 +9,7 @@ class QuestionsAnswerView extends Component {
         const optionOneVotes = this.props.question.optionOne.votes.length
         const optionTwoVotes = this.props.question.optionTwo.votes.length
         const totalVotes =  optionOneVotes + optionTwoVotes;
-        let optionVote = 0
-        if (index == 1) {
+        if (index === 1) {
             return optionOneVotes + " of " + totalVotes + " votes " + (optionOneVotes/totalVotes * 100.0).toFixed(2) + "%"
         } else {
             return optionTwoVotes + " of " + totalVotes + " votes " + (optionTwoVotes/totalVotes * 100.0 ).toFixed(2) + "%"
@@ -18,8 +17,8 @@ class QuestionsAnswerView extends Component {
     }
 
     yourVoteLabel = (index) => {
-        if (index === 1 && this.props.question.optionOne.votes.indexOf(this.props.currentUser.id) > -1 || 
-            index === 2 && this.props.question.optionTwo.votes.indexOf(this.props.currentUser.id) > -1
+        if ( (index === 1 && this.props.question.optionOne.votes.indexOf(this.props.currentUser.id) > -1) || 
+             (index === 2 && this.props.question.optionTwo.votes.indexOf(this.props.currentUser.id) > -1)
         )  {
             return <div>Your Vote</div>
         }
@@ -45,7 +44,7 @@ class QuestionsAnswerView extends Component {
         return (
             <div className='question-panel'>
                 <h3>Asked by {this.props.questionAuthorUser.name}</h3>
-                <img className="avatar" src={"../"+this.props.questionAuthorUser.avatarURL} />
+                <img alt={"Avatar of " + this.props.questionAuthorUser.name} className="avatar" src={"../"+this.props.questionAuthorUser.avatarURL} />
                 {
                     this.props.hasUserAnsweredQuestion ? (
                     <div>
