@@ -2,7 +2,7 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const GET_USERS = "GET_USERS"
 export const SET_ANSWER_USER = "SET_ANSWER_USER"
-
+export const SET_QUESTION_USER = "SET_QUESTION_USER"
 
 export function loginUser(id) {
     return {
@@ -30,5 +30,13 @@ export function setAnswerOnUser(uid, qid, answer) {
         uid,
         qid,
         answer
+    }
+}
+
+export function setQuestionOnUser(uid, qid) {
+    return {
+        type: SET_QUESTION_USER,
+        uid,
+        qid
     }
 }
