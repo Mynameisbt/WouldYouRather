@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionView from './QuestionView';
-
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class AllQuestionsView extends Component {
-    state = {
-        selectedTab: 'Unanswered'
-    }
 
-    goTab = (tab) => {
-        this.setState(() => ({
-            selectedTab: tab
-        }));
-    }
 
     sortQuestionsByRecentlyCreated = (q1, q2) => {
         const q1Date = q1.timestamp;
@@ -33,15 +26,19 @@ class AllQuestionsView extends Component {
         return (
             <div style={{width:'100%'}}>
                 <div className='tab'>
-                        <a className='tablinks' onClick={() => this.goTab('Unanswered')}>Unanswered</a>
-                        <a className='tablinks' onClick={() => this.goTab('Answered')}>Answered</a>
+                        <Link className='tablinks' to="/home/unanswered">Unanswered</Link>
+                        <Link className='tablinks' to="/home/answered">Answered</Link>
                 </div>
                 <div className="questions-list">
-                {
-                    (this.state.selectedTab === 'Unanswered') ? 
-                        this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
-                    : this.props.answeredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />) 
-                }
+                <Route exact path='/' render={({ history }) => (
+                             this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
+                          )} />
+                <Route path='/home/unanswered' render={({ history }) => (
+                             this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
+                          )} />
+                <Route path='/home/answered' render={({ history }) => (
+                             this.props.answeredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
+                          )} />
                 </div>   
             </div>
         )

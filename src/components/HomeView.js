@@ -26,15 +26,15 @@ class HomeView extends Component {
             <div>
                 <h3>Home View</h3>
                 <div className='tab'>
-                        <Link to='/' className='tablinks' >Home</Link>
+                        <Link to='/home/unanswered' className='tablinks' >Home</Link>
                         <Link to='/add' className='tablinks' >New Question</Link>
                         <Link to='/leaderboard' className='tablinks' >Leader Board</Link>
                         <span>Welcome {this.props.users[this.props.currentUser].name}</span>
-                        <a className='tablinks' onClick={this.logout}>Logout</a>
+                        <Link to='/' className='tablinks' onClick={this.logout}>Logout</Link>
                 </div>
                 <div style={{display:'flex', justifyContent:'center', flexDirection:'column',alignItems:'center'}}>
                     
-                          <Route exact path='/' render={({ history }) => (
+                          <Route path='/home/' render={({ history }) => (
                             <AllQuestionsView/>
                           )} />
                           <Route path='/add' render={({ history }) => (
