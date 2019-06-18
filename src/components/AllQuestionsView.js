@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import QuestionView from './QuestionView';
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class AllQuestionsView extends Component {
 
@@ -30,9 +31,9 @@ class AllQuestionsView extends Component {
                         <Link className='tablinks' to="/home/answered">Answered</Link>
                 </div>
                 <div className="questions-list">
-                <Route exact path='/' render={({ history }) => (
-                             this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
-                          )} />
+                <Route exact path='/home' render={({ history }) => (
+                           <Redirect to='/home/unanswered' />
+                           )} />
                 <Route path='/home/unanswered' render={({ history }) => (
                              this.props.unansweredQuestions.sort(this.sortQuestionsByRecentlyCreated).map((question) => <QuestionView key={question.id} questionId={question.id} />)
                           )} />

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { handleAnswerQuestion } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
 
 class QuestionsAnswerView extends Component {
 
@@ -41,6 +42,9 @@ class QuestionsAnswerView extends Component {
     render() {
         console.log(this.props)
         console.log(this.state)
+        if (this.props.questionExists === false) {
+            return <Redirect to="/notFound" />
+        }
         return (
             <div className='question-panel'>
                 <h3>Asked by {this.props.questionAuthorUser.name}</h3>
@@ -84,18 +88,28 @@ class QuestionsAnswerView extends Component {
 function mapStateToProps ( {authenticate, questions}, props) {
     let currentUser = authenticate.users[authenticate.currentUser];
     let question = questions[props.match.params.questionId];
+    let questionExists = true;
+    if (!question) {
+        questionExists = false;
+    } 
     let hasUserAnsweredQuestion = false;
-     if (question.optionOne.votes.indexOf(currentUser.id) === -1 &&
-         question.optionTwo.votes.indexOf(currentUser.id) === -1) {
-            hasUserAnsweredQuestion = false;
-    } else {
-            hasUserAnsweredQuestion = true;
+    let questionAuthorUser = null; 
+    if (questionExists) {
+        if (question.optionOne.votes.indexOf(currentUser.id) === -1 &&
+            question.optionTwo.votes.indexOf(currentUser.id) === -1) {
+               hasUserAnsweredQuestion = false;
+       } else {
+               hasUserAnsweredQuestion = true;
+       }
+       questionAuthorUser = authenticate.users[questions[props.match.params.questionId].author];
     }
+   
     return {
         currentUser,
         question,
-        questionAuthorUser: authenticate.users[questions[props.match.params.questionId].author],
-        hasUserAnsweredQuestion
+        questionAuthorUser,
+        hasUserAnsweredQuestion,
+        questionExists
     }
 }
 

@@ -8,6 +8,8 @@ import CreateQuestionsView from './CreateQuestionView';
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import QuestionAnswerView from './QuestionAnswerView';
+import NotFound from './NotFound';
+import { Redirect } from 'react-router-dom'
 
 
 class HomeView extends Component {
@@ -34,6 +36,9 @@ class HomeView extends Component {
                 </div>
                 <div style={{display:'flex', justifyContent:'center', flexDirection:'column',alignItems:'center'}}>
                     
+                         <Route exact path='/' render={({ history }) => (
+                            <Redirect to='/home'/>
+                          )} />
                           <Route path='/home/' render={({ history }) => (
                             <AllQuestionsView/>
                           )} />
@@ -45,6 +50,9 @@ class HomeView extends Component {
                           )} />
                         <Route path='/question/:questionId' render={({ history }) => (
                             <QuestionAnswerView />
+                          )} />
+                        <Route path='/notfound' render={({ history }) => (
+                            <NotFound/>
                           )} />
                 </div>
             </div>
